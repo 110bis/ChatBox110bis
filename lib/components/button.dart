@@ -50,7 +50,13 @@ class ButtonState extends State<Button> {
               display = !display;
             });
           }),
-      display ? widget.answer.contains("/img/", 0) ? const Text("img") : widget.answer.contains(".png") ? const Text("img") : Text(widget.answer) : const SizedBox()
+      display
+          ? widget.answer.contains("/img/", 0)
+              ? const Text("img")
+              : widget.answer.contains(".png")
+                  ? const Text("img")
+                  : Text(widget.answer)
+          : const SizedBox()
     ]);
   }
 }
