@@ -20,12 +20,10 @@ class ButtonState extends State<Button> {
       TextButton(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(
-                const Color.fromARGB(255, 211, 237, 249)),
+                const Color.fromARGB(255, 153, 214, 204)),
             foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
             minimumSize: MaterialStateProperty.all(const Size(550, 35)),
             maximumSize: MaterialStateProperty.all(const Size(550, 50)),
-            padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(horizontal: 150)),
             textStyle: MaterialStateProperty.all(const TextStyle(
               fontStyle: FontStyle.italic,
             )),
