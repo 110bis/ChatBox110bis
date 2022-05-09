@@ -1,0 +1,54 @@
+name: TestApp
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - dev
+
+jobs:
+  InstallFlutter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/Checkout@v2
+
+      - name: Install and set flutter version
+        uses: subosito/flutter-actions@v2
+        with:
+          flutter-version: '2.10.5'
+
+      - name: Upgrade flutter
+        run: flutter upgrade
+
+      - name: Check flutter
+        run: flutter doctor
+
+  AppTest:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Install dependencies
+        run: flutter pub get
+      
+      - name: Check norme
+        run: flutter format --set-exit-if-changed .
+
+      - name: Analyze project source
+        run: flutter analyze
+
+      - name: Test Build
+        run: flutter build apk --debug
+
+  DockerTest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/Checkout@v2
+
+      - name: Compile app
+        shell: bash
+        run: docker build ./
