@@ -31,16 +31,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+
       - name: Install dependencies
+        uses: InstallFlutter
         run: flutter pub get
       
       - name: Check norme
+        uses: InstallFlutter
         run: flutter format --set-exit-if-changed .
 
       - name: Analyze project source
+        uses: InstallFlutter
         run: flutter analyze
 
       - name: Test Build
+        uses: InstallFlutter
         run: flutter build apk --debug
 
   DockerTest:
