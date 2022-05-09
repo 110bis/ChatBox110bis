@@ -26,7 +26,7 @@ class ButtonList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
       children: displayCard(ask),
     );
   }
