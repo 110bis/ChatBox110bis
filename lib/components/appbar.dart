@@ -21,8 +21,14 @@ class AppBarState extends State<AppBarPage> {
       ),
       centerTitle: true,
       flexibleSpace: Container(
-        decoration:
-            const BoxDecoration(color: Color.fromARGB(255, 249, 223, 211)),
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+              Color.fromARGB(255, 255, 229, 82),
+              Color.fromARGB(255, 173, 72, 71),
+            ])),
       ),
     );
   }
