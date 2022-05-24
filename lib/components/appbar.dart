@@ -23,10 +23,16 @@ class AppBarState extends State<AppBarPage> {
       flexibleSpace: Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: [
+              0.2,
+              0.5,
+              0.75
+            ],
                 colors: [
               Color.fromARGB(255, 255, 229, 82),
+              Color.fromARGB(255, 228, 121, 74),
               Color.fromARGB(255, 173, 72, 71),
             ])),
       ),
