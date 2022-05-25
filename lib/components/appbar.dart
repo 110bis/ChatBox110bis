@@ -17,7 +17,7 @@ class AppBarState extends State<AppBarPage> {
     return AppBar(
       title: const Text(
         Lab.name,
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.black, fontSize: 30),
       ),
       centerTitle: true,
       flexibleSpace: Container(
