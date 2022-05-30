@@ -17,18 +17,17 @@ class AppBarState extends State<AppBarPage> {
     return AppBar(
       title: const Text(
         Lab.name,
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.black, fontSize: 30),
       ),
       centerTitle: true,
       flexibleSpace: Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-              Color.fromARGB(255, 255, 229, 82),
-              Color.fromARGB(255, 173, 72, 71),
-            ])),
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: [0.2, 0.5, 0.75],
+          colors: Lab.colorList,
+        )),
       ),
     );
   }
