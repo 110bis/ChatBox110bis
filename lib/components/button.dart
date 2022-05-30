@@ -23,8 +23,10 @@ class ButtonState extends State<Button> {
             //    const Color.fromARGB(255, 153, 214, 204)),
             backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
             foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-            minimumSize: MaterialStateProperty.all(const Size(550, 35)),
-            maximumSize: MaterialStateProperty.all(const Size(550, 200)),
+            minimumSize: MaterialStateProperty.all(
+                Size(MediaQuery.of(context).size.width * 0.95, 35)),
+            maximumSize: MaterialStateProperty.all(
+                Size(MediaQuery.of(context).size.width * 0.95, 200)),
             elevation: MaterialStateProperty.resolveWith<double>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.pressed) ||
@@ -65,11 +67,12 @@ class ButtonState extends State<Button> {
                       width: MediaQuery.of(context).size.width * 0.95,
                       //height: MediaQuery.of(context).size.height * 0.4,
                       child: Card(
-                        //color: const Color.fromARGB(255, 214, 153, 163),
                         color: Colors.white,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 25, vertical: 0),
-                        child: Text(widget.answer),
+                        child: Container(
+                            padding: const EdgeInsets.all(10),
+                            child: Text(widget.answer)),
                       ))
           : const SizedBox()
     ]);
