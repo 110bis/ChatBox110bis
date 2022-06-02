@@ -1,71 +1,55 @@
+import 'package:chatboxlab/api/sheets/faq_sheets_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:csv/csv.dart';
+
+import 'package:chatboxlab/global.dart' as global;
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'components/appbar.dart';
 import 'components/buttonlist.dart';
 
-void main() => runApp(const Lab());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await FAQSheetsApi.init();
+
+  runApp(const Lab());
+}
 
 class Lab extends StatefulWidget {
   const Lab({Key? key}) : super(key: key);
-
-  static const String name =
-      "110 bis, lab d'innovation de l'éducation nationale";
-
-  static const List<Color> colorList = [
-    Color.fromARGB(255, 255, 229, 82),
-    Color.fromARGB(255, 228, 121, 74),
-    Color.fromARGB(255, 173, 72, 71),
-  ];
 
   @override
   LabState createState() => LabState();
 }
 
 class LabState extends State<Lab> {
-  List<String> ask = [];
-  List<String> answer = [];
-  List<List<dynamic>> tmp = [];
-
   bool started = false;
 
   int index = 0;
 
-  Color bottomColor = Lab.colorList[2];
-  Color centerColor = Lab.colorList[1];
-  Color topColor = Lab.colorList[0];
-
-  Alignment begin = Alignment.topRight;
-  Alignment end = Alignment.bottomLeft;
-
   getData() async {
-    String rep = "";
-    rep = await rootBundle.loadString('assets/docs/data.csv');
-    tmp = const CsvToListConverter(fieldDelimiter: ',').convert(rep);
-    for (var i = 0; tmp.length != i; ++i) {
-      ask.add(tmp[i][0].toString());
-      answer.add(tmp[i][1].toString());
-    }
-    setState(() {});
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    global.appName = packageInfo.appName;
+    global.version = packageInfo.version;
+    final _faq = await FAQSheetsApi.getAll();
+    await Future.delayed(const Duration(seconds: 5));
+    setState(() {
+      global.faq = _faq;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (ask.isEmpty ||
-        answer.isEmpty &&
-            ask.length != answer.length &&
-            tmp.length / 2 != ask.length &&
-            tmp.length / 2 != answer.length) {
+    if (global.faq.isEmpty) {
       getData();
       return const Center(child: CircularProgressIndicator());
     } else {
       if (!started) {
         Future.delayed(const Duration(milliseconds: 10), () {
           setState(() {
-            bottomColor = Lab.colorList[1];
-            centerColor = Lab.colorList[0];
-            topColor = Lab.colorList[1];
+            global.bottomColor = global.colorList[1];
+            global.centerColor = global.colorList[0];
+            global.topColor = global.colorList[1];
             index = index + 1;
           });
         });
@@ -73,10 +57,10 @@ class LabState extends State<Lab> {
       }
       return MaterialApp(
         theme: ThemeData(
-          fontFamily: 'Marianne',
+          fontFamily: global.fontFamily,
         ),
         debugShowCheckedModeBanner: false,
-        title: Lab.name,
+        title: global.name,
         home: Scaffold(
             appBar: const AppBarPage(),
             body: AnimatedContainer(
@@ -90,32 +74,32 @@ class LabState extends State<Lab> {
                   }
 
                   if (index == 0) {
-                    topColor = Lab.colorList[index];
-                    centerColor = Lab.colorList[index + 1];
-                    bottomColor = Lab.colorList[index + 2];
+                    global.topColor = global.colorList[index];
+                    global.centerColor = global.colorList[index + 1];
+                    global.bottomColor = global.colorList[index + 2];
                   } else if (index == 1) {
-                    topColor = Lab.colorList[index];
-                    centerColor = Lab.colorList[index - 1];
-                    bottomColor = Lab.colorList[index];
+                    global.topColor = global.colorList[index];
+                    global.centerColor = global.colorList[index - 1];
+                    global.bottomColor = global.colorList[index];
                   } else if (index == 2) {
-                    topColor = Lab.colorList[index];
-                    centerColor = Lab.colorList[index - 1];
-                    bottomColor = Lab.colorList[index - 2];
+                    global.topColor = global.colorList[index];
+                    global.centerColor = global.colorList[index - 1];
+                    global.bottomColor = global.colorList[index - 2];
                   }
                 });
               },
               decoration: BoxDecoration(
-                gradient: LinearGradient(begin: begin, end: end, stops: const [
-                  0.2,
-                  0.5,
-                  0.75
-                ], colors: [
-                  topColor,
-                  centerColor,
-                  bottomColor,
-                ]),
+                gradient: LinearGradient(
+                    begin: global.begin,
+                    end: global.end,
+                    stops: global.stops,
+                    colors: [
+                      global.topColor,
+                      global.centerColor,
+                      global.bottomColor,
+                    ]),
               ),
-              child: ButtonList(ask: ask, answer: answer),
+              child: const ButtonList(),
             )),
       );
     }
