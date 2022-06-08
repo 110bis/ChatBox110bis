@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:chatboxlab/global.dart' as global;
 
 import 'button.dart';
 
 class ButtonList extends StatelessWidget {
-  const ButtonList({Key? key, required this.ask, required this.answer})
-      : super(key: key);
-
-  final List<String> ask;
-  final List<String> answer;
+  const ButtonList({Key? key}) : super(key: key);
 
   List<Widget> displayCard() {
     List<Widget> data = [];
-    for (var i = 0; i < ask.length; ++i) {
-      if (ask.length != i + 1) {
-        data.add(Button(ask: ask[i], answer: answer[i]));
+    for (var i = 0; i < global.faq.length; ++i) {
+      if (global.faq.length != i + 1) {
+        data.add(Button(faq: global.faq[i]));
         data.add(const SizedBox(height: 15));
       } else {
-        data.add(Button(ask: ask[i], answer: answer[i]));
+        data.add(Button(faq: global.faq[i]));
       }
     }
     return data;

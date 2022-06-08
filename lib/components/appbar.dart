@@ -1,5 +1,7 @@
-import 'package:chatboxlab/main.dart';
 import 'package:flutter/material.dart';
+import 'package:restart_app/restart_app.dart';
+
+import 'package:chatboxlab/global.dart' as global;
 
 class AppBarPage extends StatefulWidget with PreferredSizeWidget {
   const AppBarPage({Key? key}) : super(key: key);
@@ -12,22 +14,44 @@ class AppBarPage extends StatefulWidget with PreferredSizeWidget {
 }
 
 class AppBarState extends State<AppBarPage> {
+  static Color orange = global.colorList[1];
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text(
-        Lab.name,
-        style: TextStyle(color: Colors.black),
+        global.name,
+        style: TextStyle(color: Colors.black, fontSize: 30),
       ),
       centerTitle: true,
+      actions: [
+        IconButton(
+          onPressed: () {
+            Restart.restartApp();
+          },
+          color: Colors.black,
+          icon: const Icon(Icons.restart_alt_sharp),
+        ),
+        IconButton(
+          onPressed: () {
+            showAboutDialog(
+              context: context,
+              applicationName: global.appName,
+              applicationVersion: global.version,
+            );
+          },
+          color: Colors.black,
+          icon: const Icon(Icons.info),
+        ),
+      ],
       flexibleSpace: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
                 colors: [
-              Color.fromARGB(255, 255, 229, 82),
-              Color.fromARGB(255, 173, 72, 71),
+              orange,
+              orange,
             ])),
       ),
     );
