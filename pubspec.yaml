@@ -91,6 +91,6 @@ flutter:
          - asset: assets/fonts/Marianne-RegularItalic.otf
          - asset: assets/fonts/Marianne-Thin.otf
          - asset: assets/fonts/Marianne-ThinItalic.otf
-  
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
