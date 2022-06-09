@@ -20,11 +20,7 @@ class AppBarState extends State<AppBarPage> {
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text(
-<<<<<<< HEAD
         global.name,
-=======
-        Lab.name,
->>>>>>> 20-improve-design
         style: TextStyle(color: Colors.black, fontSize: 30),
       ),
       centerTitle: true,
@@ -53,21 +49,9 @@ class AppBarState extends State<AppBarPage> {
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-<<<<<<< HEAD
                 colors: [
               orange,
               orange,
-=======
-                stops: [
-              0.2,
-              0.5,
-              0.75
-            ],
-                colors: [
-              Color.fromARGB(255, 255, 229, 82),
-              Color.fromARGB(255, 228, 121, 74),
-              Color.fromARGB(255, 173, 72, 71),
->>>>>>> 20-improve-design
             ])),
       ),
     );
