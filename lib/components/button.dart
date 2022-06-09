@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Button extends StatefulWidget {
-  const Button({Key? key, required this.ask, required this.answer})
-      : super(key: key);
+import 'package:chatboxlab/global.dart' as global;
+import 'package:chatboxlab/models/faq.dart';
 
-  final String ask;
-  final String answer;
+class Button extends StatefulWidget {
+  const Button({Key? key, required this.faq}) : super(key: key);
+
+  final FAQ faq;
 
   @override
   ButtonState createState() => ButtonState();
@@ -19,14 +20,12 @@ class ButtonState extends State<Button> {
     return Column(children: [
       TextButton(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(
-                const Color.fromARGB(255, 153, 214, 204)),
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
             foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-            minimumSize: MaterialStateProperty.all(const Size(550, 35)),
-            maximumSize: MaterialStateProperty.all(const Size(550, 50)),
-            textStyle: MaterialStateProperty.all(const TextStyle(
-              fontStyle: FontStyle.italic,
-            )),
+            minimumSize: MaterialStateProperty.all(
+                Size(MediaQuery.of(context).size.width * 0.95, 35)),
+            maximumSize: MaterialStateProperty.all(
+                Size(MediaQuery.of(context).size.width * 0.95, 200)),
             elevation: MaterialStateProperty.resolveWith<double>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.pressed) ||
@@ -36,24 +35,41 @@ class ButtonState extends State<Button> {
                 return 5;
               },
             ),
-            //side: MaterialStateProperty.all<BorderSide>(const BorderSide(color: Colors.black, width: 0.5)),
             shape: MaterialStateProperty.all<BeveledRectangleBorder>(
                 const BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5)))),
-            //shadowColor: MaterialStateProperty.all<Color>(Colors.black),
+            shadowColor: MaterialStateProperty.all<Color>(global.colorList[1]),
           ),
-          child: Text(widget.ask),
+          child: Text(
+            widget.faq.ask,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontFamily: global.fontFamily,
+            ),
+          ),
           onPressed: () {
             setState(() {
               display = !display;
             });
           }),
+      const SizedBox(height: 10),
       display
-          ? widget.answer.contains("/img/", 0)
+          ? widget.faq.anwser.contains("/img/")
               ? const Text("img")
-              : widget.answer.contains(".png")
+              : widget.faq.anwser.contains(".png")
                   ? const Text("img")
-                  : Text(widget.answer)
+                  : SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      child: Card(
+                        color: Colors.white,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 25, vertical: 0),
+                        child: Container(
+                            padding: const EdgeInsets.all(10),
+                            child: Text(widget.faq.anwser)),
+                      ))
           : const SizedBox()
     ]);
   }
