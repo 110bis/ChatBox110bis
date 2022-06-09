@@ -54,7 +54,7 @@ jobs:
     needs:
       - AppTest
     runs-on: ubuntu-latest
-    if: ${GITHUB_REF} == 'refs/heads/main' || ${GITHUB_REF} == 'refs/heads/master'
+    if: ${{ GITHUB_REF }} == 'refs/heads/main' || ${{ GITHUB_REF }} == 'refs/heads/master'
 
     steps:
       - uses: actions/Checkout@v2
