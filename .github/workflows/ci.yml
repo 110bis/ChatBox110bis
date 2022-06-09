@@ -54,7 +54,7 @@ jobs:
     needs:
       - AppTest
     runs-on: ubuntu-latest
-    if: github.branch_name == "main" || github.branch_name == "master"
+    if: GITHUB_REF == 'refs/heads/main' || GITHUB_REF == 'refs/heads/master'
 
     steps:
       - uses: actions/Checkout@v2
