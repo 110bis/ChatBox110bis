@@ -8,12 +8,35 @@ on:
       - dev
 
 jobs:
-  AppTest:
+  CreateEnvFile:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/Checkout@v2
+      - uses: actions/checkout@v2
+      - name: Create .env file
+        run: |
+          touch .env
+          echo TYPE=${{ secrets.TYPE }} > .env
+          echo PROJECT_ID=${{ secrets.TYPE }} > .env
+          echo PRIVATE_KEY_ID=${{ secrets.TYPE }} > .env
+          echo PRIVATE_KEY=${{ secrets.TYPE }} > .env
+          echo CLIENT_EMAIL=${{ secrets.TYPE }} > .env
+          echo CLIENT_ID=${{ secrets.TYPE }} > .env
+          echo AUTH_URI=${{ secrets.TYPE }} > .env
+          echo TOKEN_URI=${{ secrets.TYPE }} > .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.TYPE }} > .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.TYPE }} > .env
+          echo SPREADSHEETID=${{ secrets.TYPE }} > .env
+          echo TITLE_FAQ=${{ secrets.TYPE }} > .env
+
+  AppTest:
+    needs:
+      - CreateEnvFile
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/Checkout@v2
+      - uses: CreateEnvFile
 
       - name: Install and set flutter version
         uses: subosito/flutter-action@v2
@@ -39,12 +62,15 @@ jobs:
         run: flutter build apk --debug
 
   DockerTest:
-    needs: AppTest
+    needs:
+      - AppTest
+      - CreateEnvFile
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/Checkout@v2
+
+      - uses: actions/Checkout@v2
+      - uses: CreateEnvFile
 
       - name: Compile app
         shell: bash
@@ -53,11 +79,13 @@ jobs:
   Deployement:
     needs:
       - AppTest
+      - CreateEnvFile
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
 
     steps:
       - uses: actions/Checkout@v2
+      - uses: CreateEnvFile
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/flutter-gh-pages@v7
         with:

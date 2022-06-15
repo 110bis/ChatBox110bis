@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:restart_app/restart_app.dart';
 
@@ -25,19 +26,21 @@ class AppBarState extends State<AppBarPage> {
       ),
       centerTitle: true,
       actions: [
-        IconButton(
-          onPressed: () {
-            Restart.restartApp();
-          },
-          color: Colors.black,
-          icon: const Icon(Icons.restart_alt_sharp),
-        ),
+        kIsWeb
+            ? const SizedBox()
+            : IconButton(
+                onPressed: () {
+                  Restart.restartApp();
+                },
+                color: Colors.black,
+                icon: const Icon(Icons.restart_alt_sharp),
+              ),
         IconButton(
           onPressed: () {
             showAboutDialog(
               context: context,
               applicationName: global.appName,
-              applicationVersion: global.version,
+              applicationVersion: "ver. " + global.version,
             );
           },
           color: Colors.black,
