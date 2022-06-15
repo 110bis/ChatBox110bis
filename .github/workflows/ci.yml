@@ -81,7 +81,7 @@ jobs:
       - AppTest
       - CreateEnvFile
     runs-on: ubuntu-latest
-    if: branch == main || branch == master
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
 
     steps:
       - uses: actions/Checkout@v2
@@ -89,4 +89,4 @@ jobs:
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
-          baseHref: /${GITHUB_REPOSITORY}/
+          baseHref: /${github.event.repository.name}/
