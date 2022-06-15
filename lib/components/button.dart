@@ -68,11 +68,7 @@ class ButtonState extends State<Button> {
                             horizontal: 25, vertical: 0),
                         child: Container(
                             padding: const EdgeInsets.all(10),
-<<<<<<< HEAD
                             child: Text(widget.faq.anwser)),
-=======
-                            child: Text(widget.answer)),
->>>>>>> 20-improve-design
                       ))
           : const SizedBox()
     ]);
