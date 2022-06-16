@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Credential {
@@ -41,16 +43,14 @@ class Credential {
         '"auth_provider_x509_cert_url"': '"' + _authProvider + '"',
         '"client_x509_cert_url"': '"' + _clientUrl + '"',
       };
-
-      // ignore: avoid_print
-      print("Google Sheet credential Successfuly Load");
+      log("Google Sheet credential Successfuly Load");
     } catch (e) {
-      // ignore: avoid_print
-      print('Init Error: $e');
+      log('Init Error: $e');
     }
   }
 
   static Map<String, dynamic> toJSON() {
+    if (credential.isEmpty) init();
     return credential;
   }
 }
