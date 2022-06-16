@@ -36,7 +36,6 @@ jobs:
 
     steps:
       - uses: actions/Checkout@v2
-      - uses: CreateEnvFile
 
       - name: Install and set flutter version
         uses: subosito/flutter-action@v2
@@ -48,6 +47,22 @@ jobs:
 
       - name: Check flutter
         run: flutter doctor
+
+      - name: Create .env file
+        run: |
+          touch .env
+          echo TYPE=${{ secrets.TYPE }} > .env
+          echo PROJECT_ID=${{ secrets.TYPE }} > .env
+          echo PRIVATE_KEY_ID=${{ secrets.TYPE }} > .env
+          echo PRIVATE_KEY=${{ secrets.TYPE }} > .env
+          echo CLIENT_EMAIL=${{ secrets.TYPE }} > .env
+          echo CLIENT_ID=${{ secrets.TYPE }} > .env
+          echo AUTH_URI=${{ secrets.TYPE }} > .env
+          echo TOKEN_URI=${{ secrets.TYPE }} > .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.TYPE }} > .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.TYPE }} > .env
+          echo SPREADSHEETID=${{ secrets.TYPE }} > .env
+          echo TITLE_FAQ=${{ secrets.TYPE }} > .env
 
       - name: Install dependencies
         run: flutter pub get
@@ -70,7 +85,22 @@ jobs:
     steps:
 
       - uses: actions/Checkout@v2
-      - uses: CreateEnvFile
+
+      - name: Create .env file
+        run: |
+          touch .env
+          echo TYPE=${{ secrets.TYPE }} > .env
+          echo PROJECT_ID=${{ secrets.TYPE }} > .env
+          echo PRIVATE_KEY_ID=${{ secrets.TYPE }} > .env
+          echo PRIVATE_KEY=${{ secrets.TYPE }} > .env
+          echo CLIENT_EMAIL=${{ secrets.TYPE }} > .env
+          echo CLIENT_ID=${{ secrets.TYPE }} > .env
+          echo AUTH_URI=${{ secrets.TYPE }} > .env
+          echo TOKEN_URI=${{ secrets.TYPE }} > .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.TYPE }} > .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.TYPE }} > .env
+          echo SPREADSHEETID=${{ secrets.TYPE }} > .env
+          echo TITLE_FAQ=${{ secrets.TYPE }} > .env
 
       - name: Compile app
         shell: bash
@@ -85,8 +115,24 @@ jobs:
 
     steps:
       - uses: actions/Checkout@v2
-      - uses: CreateEnvFile
       - uses: subosito/flutter-action@v2
+
+      - name: Create .env file
+        run: |
+          touch .env
+          echo TYPE=${{ secrets.TYPE }} > .env
+          echo PROJECT_ID=${{ secrets.TYPE }} > .env
+          echo PRIVATE_KEY_ID=${{ secrets.TYPE }} > .env
+          echo PRIVATE_KEY=${{ secrets.TYPE }} > .env
+          echo CLIENT_EMAIL=${{ secrets.TYPE }} > .env
+          echo CLIENT_ID=${{ secrets.TYPE }} > .env
+          echo AUTH_URI=${{ secrets.TYPE }} > .env
+          echo TOKEN_URI=${{ secrets.TYPE }} > .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.TYPE }} > .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.TYPE }} > .env
+          echo SPREADSHEETID=${{ secrets.TYPE }} > .env
+          echo TITLE_FAQ=${{ secrets.TYPE }} > .env
+
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
-          baseHref: /${github.event.repository.name}/
+          baseHref: /ChatBox110bis/
