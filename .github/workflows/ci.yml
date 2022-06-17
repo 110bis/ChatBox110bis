@@ -135,4 +135,4 @@ jobs:
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
-          baseHref: /ChatBox110bis/
+          baseHref: /
