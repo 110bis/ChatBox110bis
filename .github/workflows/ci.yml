@@ -17,17 +17,17 @@ jobs:
         run: |
           touch .env
           echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.TYPE }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.TYPE }} >> .env
-          echo PRIVATE_KEY=${{ secrets.TYPE }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.TYPE }} >> .env
-          echo CLIENT_ID=${{ secrets.TYPE }} >> .env
-          echo AUTH_URI=${{ secrets.TYPE }} >> .env
-          echo TOKEN_URI=${{ secrets.TYPE }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.TYPE }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.TYPE }} >> .env
-          echo SPREADSHEETID=${{ secrets.TYPE }} >> .env
-          echo TITLE_FAQ=${{ secrets.TYPE }} >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
 
   AppTest:
     needs:
@@ -52,17 +52,17 @@ jobs:
         run: |
           touch .env
           echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.TYPE }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.TYPE }} >> .env
-          echo PRIVATE_KEY=${{ secrets.TYPE }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.TYPE }} >> .env
-          echo CLIENT_ID=${{ secrets.TYPE }} >> .env
-          echo AUTH_URI=${{ secrets.TYPE }} >> .env
-          echo TOKEN_URI=${{ secrets.TYPE }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.TYPE }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.TYPE }} >> .env
-          echo SPREADSHEETID=${{ secrets.TYPE }} >> .env
-          echo TITLE_FAQ=${{ secrets.TYPE }} >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
 
       - name: Install dependencies
         run: flutter pub get
@@ -90,17 +90,17 @@ jobs:
         run: |
           touch .env
           echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.TYPE }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.TYPE }} >> .env
-          echo PRIVATE_KEY=${{ secrets.TYPE }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.TYPE }} >> .env
-          echo CLIENT_ID=${{ secrets.TYPE }} >> .env
-          echo AUTH_URI=${{ secrets.TYPE }} >> .env
-          echo TOKEN_URI=${{ secrets.TYPE }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.TYPE }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.TYPE }} >> .env
-          echo SPREADSHEETID=${{ secrets.TYPE }} >> .env
-          echo TITLE_FAQ=${{ secrets.TYPE }} >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
 
       - name: Compile app
         shell: bash
@@ -120,20 +120,20 @@ jobs:
         run: |
           touch .env
           echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.TYPE }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.TYPE }} >> .env
-          echo PRIVATE_KEY=${{ secrets.TYPE }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.TYPE }} >> .env
-          echo CLIENT_ID=${{ secrets.TYPE }} >> .env
-          echo AUTH_URI=${{ secrets.TYPE }} >> .env
-          echo TOKEN_URI=${{ secrets.TYPE }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.TYPE }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.TYPE }} >> .env
-          echo SPREADSHEETID=${{ secrets.TYPE }} >> .env
-          echo TITLE_FAQ=${{ secrets.TYPE }} >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
 
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
-          baseHref: /
+          baseHref: /ChatBox110bis/
 
