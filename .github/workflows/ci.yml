@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/Checkout@v2
-      - uses: ./.github/workflows/create_env.yml@3-prototype-projet
+      - uses: ./.github/workflows/create_env/actions.yml
 
   AppTest:
     needs:
