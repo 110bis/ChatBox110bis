@@ -6,14 +6,14 @@ on:
       - master
       - main
       - dev
-      - 3-prototype-projet
+      - 3-prototype-project
 
 jobs:
   CreateEnvFile:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/Checkout@v2
-      - uses: ./.github/workflows/create_env.yml@dev
+      - uses: ./.github/workflows/create_env.yml@3-prototype-project
 
   AppTest:
     needs:
