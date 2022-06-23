@@ -13,7 +13,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/Checkout@v2
-      - uses: ./.github/workflows/create_env/actions.yml
+      - name: Create .env file
+        run: |
+          touch .env
+          echo TYPE=${{ secrets.TYPE }} | base64 >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} | base64 >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} | base64 >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} | base64 >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} | base64 >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} | base64 >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} | base64 >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
 
   AppTest:
     needs:
@@ -35,7 +49,20 @@ jobs:
         run: flutter doctor
 
       - name: Create .env file
-        uses: ./.github/workflows/create_env.yml
+        run: |
+          touch .env
+          echo TYPE=${{ secrets.TYPE }} | base64 >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} | base64 >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} | base64 >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} | base64 >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} | base64 >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} | base64 >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} | base64 >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
 
       - name: Install dependencies
         run: flutter pub get
@@ -59,7 +86,20 @@ jobs:
       - uses: actions/Checkout@v2
 
       - name: Create .env file
-        uses: ./.github/workflows/create_env.yml
+        run: |
+          touch .env
+          echo TYPE=${{ secrets.TYPE }} | base64 >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} | base64 >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} | base64 >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} | base64 >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} | base64 >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} | base64 >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} | base64 >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
 
       - name: Compile app
         shell: bash
@@ -75,7 +115,20 @@ jobs:
       - uses: actions/Checkout@v2
 
       - name: Create .env file
-        uses: ./.github/workflows/create_env.yml
+        run: |
+          touch .env
+          echo TYPE=${{ secrets.TYPE }} | base64 >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} | base64 >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} | base64 >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} | base64 >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} | base64 >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} | base64 >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} | base64 >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
 
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/flutter-gh-pages@v7
