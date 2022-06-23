@@ -8,30 +8,18 @@ on:
       - dev
 
 jobs:
-  CreateEnvFile:
+  TestCreateEnvFile:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
       - name: Create .env file
-        run: |
-          touch .env
-          echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
-          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
-          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
-          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
-          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
-          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
+        uses: ./.github/worflows/create_env.yml
+        run: echo "Create .env file success"
 
   AppTest:
     needs:
-      - CreateEnvFile
+      - TestCreateEnvFile
     runs-on: ubuntu-latest
 
     steps:
@@ -49,20 +37,8 @@ jobs:
         run: flutter doctor
 
       - name: Create .env file
-        run: |
-          touch .env
-          echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
-          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
-          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
-          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
-          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
-          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
+        uses: ./.github/worflows/create_env.yml
+        run: echo "Create .env file success"
 
       - name: Install dependencies
         run: flutter pub get
@@ -79,7 +55,7 @@ jobs:
   DockerTest:
     needs:
       - AppTest
-      - CreateEnvFile
+      - TestCreateEnvFile
     runs-on: ubuntu-latest
 
     steps:
@@ -87,20 +63,8 @@ jobs:
       - uses: actions/Checkout@v2
 
       - name: Create .env file
-        run: |
-          touch .env
-          echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
-          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
-          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
-          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
-          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
-          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
+        uses: ./.github/worflows/create_env.yml
+        run: echo "Create .env file success"
 
       - name: Compile app
         shell: bash
@@ -109,7 +73,7 @@ jobs:
   Deployement:
     needs:
       - AppTest
-      - CreateEnvFile
+      - TestCreateEnvFile
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
 
@@ -117,23 +81,15 @@ jobs:
       - uses: actions/Checkout@v2
 
       - name: Create .env file
-        run: |
-          touch .env
-          echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
-          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
-          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
-          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
-          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
-          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
+        uses: ./.github/worflows/create_env.yml
+        run: echo "Create .env file success"
 
       - uses: subosito/flutter-action@v2
+
+      - name: Deployement
+      - run: "Start deployement"
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
           baseHref: /ChatBox110bis/
+      - run: "End deployement"
 
