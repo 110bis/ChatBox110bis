@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: TestCreateEnvFile
       - uses: actions/checkout@v2
-      - uses: ./.github/worflows/create_env.yml
-      - run: echo "Create .env file success"
+      - name: Create .env file
+        uses: ./.github/worflows/create_env.yml
+        run: echo "Create .env file success"
 
   AppTest:
     needs:
@@ -37,8 +37,8 @@ jobs:
         run: flutter doctor
 
       - name: Create .env file
-      - uses: ./.github/worflows/create_env.yml
-      - run: echo "Create .env file success"
+        uses: ./.github/worflows/create_env.yml
+        run: echo "Create .env file success"
 
       - name: Install dependencies
         run: flutter pub get
@@ -63,8 +63,8 @@ jobs:
       - uses: actions/Checkout@v2
 
       - name: Create .env file
-      - uses: ./.github/worflows/create_env.yml
-      - run: echo "Create .env file success"
+        uses: ./.github/worflows/create_env.yml
+        run: echo "Create .env file success"
 
       - name: Compile app
         shell: bash
@@ -81,8 +81,8 @@ jobs:
       - uses: actions/Checkout@v2
 
       - name: Create .env file
-      - uses: ./.github/worflows/create_env.yml
-      - run: echo "Create .env file success"
+        uses: ./.github/worflows/create_env.yml
+        run: echo "Create .env file success"
 
       - uses: subosito/flutter-action@v2
 
