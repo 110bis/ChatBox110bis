@@ -10,17 +10,9 @@ on:
 jobs:
   CreateEnvFile:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/Checkout@v2
-      - name: Create .env file
-        uses: ./.github/workflows/create_env.yml
-
-      - name: Print .env file
-        run: |
-          echo ".env file:"
-          cat .env
-          echo ".env file end"
+      - uses: ./.github/workflows/create_env.yml@dev
 
   AppTest:
     needs:
