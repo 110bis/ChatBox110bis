@@ -15,6 +15,7 @@ jobs:
       - name: TestCreateEnvFile
       - uses: actions/checkout@v2
       - uses: ./.github/worflows/create_env.yml
+      - run: echo "Create .env file success"
 
   AppTest:
     needs:
