@@ -6,9 +6,11 @@ on:
       - master
       - main
       - dev
-      - 3-prototype-projet
 
 jobs:
+
+## CREATE ENV ##
+
   CreateEnvFile:
     runs-on: ubuntu-latest
     steps:
@@ -28,6 +30,8 @@ jobs:
           echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
           echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
           echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
+
+## TEST APP ##
 
   AppTest:
     needs:
@@ -76,6 +80,8 @@ jobs:
       - name: Test Build
         run: flutter build apk --debug
 
+## DOCKER ##
+
   DockerTest:
     needs:
       - AppTest
@@ -105,8 +111,11 @@ jobs:
         shell: bash
         run: docker build ./
 
+## DEPLOYEMENT ##
+
   Deployement:
     needs:
+      - CreateEnvFile
       - AppTest
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
