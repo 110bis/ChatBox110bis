@@ -8,26 +8,30 @@ on:
       - dev
 
 jobs:
+
+## CREATE ENV ##
+
   CreateEnvFile:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/Checkout@v2
       - name: Create .env file
         run: |
           touch .env
-          echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
-          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
-          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
-          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
-          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
-          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
+          echo TYPE=${{ secrets.TYPE }} | base64 >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} | base64 >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} | base64 >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} | base64 >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} | base64 >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} | base64 >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} | base64 >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
+
+## TEST APP ##
 
   AppTest:
     needs:
@@ -51,18 +55,18 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
-          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
-          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
-          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
-          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
-          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
+          echo TYPE=${{ secrets.TYPE }} | base64 >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} | base64 >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} | base64 >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} | base64 >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} | base64 >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} | base64 >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} | base64 >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
 
       - name: Install dependencies
         run: flutter pub get
@@ -76,10 +80,11 @@ jobs:
       - name: Test Build
         run: flutter build apk --debug
 
+## DOCKER ##
+
   DockerTest:
     needs:
       - AppTest
-      - CreateEnvFile
     runs-on: ubuntu-latest
 
     steps:
@@ -89,27 +94,29 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
-          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
-          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
-          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
-          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
-          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
+          echo TYPE=${{ secrets.TYPE }} | base64 >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} | base64 >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} | base64 >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} | base64 >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} | base64 >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} | base64 >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} | base64 >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
 
       - name: Compile app
         shell: bash
         run: docker build ./
 
+## DEPLOYEMENT ##
+
   Deployement:
     needs:
-      - AppTest
       - CreateEnvFile
+      - AppTest
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
 
@@ -119,18 +126,18 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo TYPE=${{ secrets.TYPE }} >> .env
-          echo PROJECT_ID=${{ secrets.PROJECT_ID }} >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
-          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
-          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} >> .env
-          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
-          echo AUTH_URI=${{ secrets.AUTH_URI }} >> .env
-          echo TOKEN_URI=${{ secrets.TOKEN_URI }} >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} >> .env
-          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} >> .env
+          echo TYPE=${{ secrets.TYPE }} | base64 >> .env
+          echo PROJECT_ID=${{ secrets.PROJECT_ID }} | base64 >> .env
+          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} | base64 >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} | base64 >> .env
+          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} | base64 >> .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} | base64 >> .env
+          echo AUTH_URI=${{ secrets.AUTH_URI }} | base64 >> .env
+          echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
+          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
+          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
 
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/flutter-gh-pages@v7
