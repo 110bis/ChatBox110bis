@@ -37,6 +37,7 @@ jobs:
 
       - name: Create .env file
       - uses: ./.github/worflows/create_env.yml
+      - run: echo "Create .env file success"
 
       - name: Install dependencies
         run: flutter pub get
@@ -62,6 +63,7 @@ jobs:
 
       - name: Create .env file
       - uses: ./.github/worflows/create_env.yml
+      - run: echo "Create .env file success"
 
       - name: Compile app
         shell: bash
