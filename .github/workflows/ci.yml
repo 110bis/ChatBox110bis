@@ -13,9 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Create .env file
-        uses: ./.github/worflows/create_env.yml
-        run: echo "Create .env file success"
+      - uses: ./.github/worflows/create_env.yml
 
   AppTest:
     needs:
