@@ -14,8 +14,13 @@ jobs:
     steps:
       - uses: actions/Checkout@v2
       - name: Create .env file
-        run: echo "Create .env file"
         uses: ./.github/workflows/create_env.yml
+
+      - name: Print .env file
+        run: |
+          echo ".env file:"
+          cat .env
+          echo ".env file end"
 
   AppTest:
     needs:
