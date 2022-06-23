@@ -41,6 +41,9 @@ jobs:
       - name: Check flutter
         run: flutter doctor
 
+      - name: Create .env file
+        uses: ./.github/workflows/create_env.yml
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -62,6 +65,9 @@ jobs:
 
       - uses: actions/Checkout@v2
 
+      - name: Create .env file
+        uses: ./.github/workflows/create_env.yml
+
       - name: Compile app
         shell: bash
         run: docker build ./
@@ -74,6 +80,9 @@ jobs:
 
     steps:
       - uses: actions/Checkout@v2
+
+      - name: Create .env file
+        uses: ./.github/workflows/create_env.yml
 
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/flutter-gh-pages@v7
