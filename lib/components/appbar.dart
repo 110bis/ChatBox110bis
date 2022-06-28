@@ -17,14 +17,34 @@ class AppBarPage extends StatefulWidget with PreferredSizeWidget {
 class AppBarState extends State<AppBarPage> {
   static Color orange = global.colorList[1];
 
+  Widget _qrCodeDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Text("QR Code"),
+      content: Image.asset(
+        "assets/img/qrcode.png",
+        fit: BoxFit.contain,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text(
-        global.name,
+        "Version Beta",
         style: TextStyle(color: Colors.black, fontSize: 30),
       ),
       centerTitle: true,
+      leading: !kIsWeb
+          ? IconButton(
+              icon: const Icon(Icons.qr_code_2, color: Colors.black),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => _qrCodeDialog(context));
+              },
+            )
+          : const SizedBox(),
       actions: [
         kIsWeb
             ? const SizedBox()
