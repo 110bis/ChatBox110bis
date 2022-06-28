@@ -1,4 +1,4 @@
-name: TestApp
+name: TestApp & Deploy
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - master
       - main
       - dev
+      - ver_2.0.0
 
 jobs:
 
@@ -28,8 +29,8 @@ jobs:
           echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
           echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
           echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
-          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEET_ID }} | base64 >> .env
+          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env | base64 -d > .env
 
 ## TEST APP ##
 
@@ -65,7 +66,7 @@ jobs:
           echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
           echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
           echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEET_ID }} | base64 >> .env
           echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
 
       - name: Install dependencies
@@ -104,7 +105,7 @@ jobs:
           echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
           echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
           echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
+          echo SPREADSHEET_ID=${{ secrets.SPREADSHEET_ID }} | base64 >> .env
           echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
 
       - name: Compile app
@@ -123,24 +124,15 @@ jobs:
     steps:
       - uses: actions/Checkout@v2
 
-      - name: Create .env file
+      - name: Push
         run: |
-          touch .env
-          echo TYPE=${{ secrets.TYPE }} | base64 >> .env
-          echo PROJECT_ID=${{ secrets.PROJECT_ID }} | base64 >> .env
-          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} | base64 >> .env
-          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} | base64 >> .env
-          echo CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} | base64 >> .env
-          echo CLIENT_ID=${{ secrets.CLIENT_ID }} | base64 >> .env
-          echo AUTH_URI=${{ secrets.AUTH_URI }} | base64 >> .env
-          echo TOKEN_URI=${{ secrets.TOKEN_URI }} | base64 >> .env
-          echo AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }} | base64 >> .env
-          echo CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }} | base64 >> .env
-          echo SPREADSHEET_ID=${{ secrets.SPREADSHEETID }} | base64 >> .env
-          echo TITLE_FAQ=${{ secrets.TITLE_FAQ }} | base64 >> .env
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git --work-tree ./ add --all
+          git commit -m "Deployment"
+          git push origin HEAD:deploy --force
 
-      - uses: subosito/flutter-action@v2
-      - uses: bluefireteam/flutter-gh-pages@v7
-        with:
-          baseHref: /ChatBox110bis/
-
+      - name: Deployement
+        run: |
+          echo "Push successfuly"
+          echo "Deployement is starting"
