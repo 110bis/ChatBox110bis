@@ -72,12 +72,18 @@ class LabState extends State<Lab> {
               leadingWidth: 100,
               leading: Container(
                 padding: const EdgeInsets.all(3.5),
-                child: Image.asset("assets/img/logo_MENJS.jpg", isAntiAlias: true,),
+                child: Image.asset(
+                  "assets/img/logo_MENJS.jpg",
+                  isAntiAlias: true,
+                ),
               ),
               actions: [
                 Container(
                   padding: const EdgeInsets.all(3.5),
-                  child: Image.asset("assets/img/110bisd.jpg", isAntiAlias: true,),
+                  child: Image.asset(
+                    "assets/img/110bisd.jpg",
+                    isAntiAlias: true,
+                  ),
                 ),
               ],
             ),
