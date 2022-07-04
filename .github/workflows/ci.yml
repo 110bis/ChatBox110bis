@@ -128,7 +128,7 @@ jobs:
         run: |
           git config --local user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@github.com"
-          git commit -m "Deployment"
+          git commit -m "Deployment" -a
 
       - name: Push
         uses: ad-m/github-push-action@master
