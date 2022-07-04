@@ -124,13 +124,18 @@ jobs:
     steps:
       - uses: actions/Checkout@v2
 
-      - name: Push
+      - name: Commit files
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git --work-tree ./ add --all
+          git config --local user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@github.com"
           git commit -m "Deployment"
-          git push origin HEAD:deploy --force
+
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: deploy
+          force: true
 
       - name: Deployement
         run: |
