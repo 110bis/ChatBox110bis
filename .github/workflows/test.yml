@@ -13,32 +13,34 @@ jobs:
       name: Production
       url: https://test.com
     steps:
+      - uses: actions/Checkout@v2
+
       - name: Test 1
-      - run: echo "Deploying to production"
+        run: echo "Deploying to production"
 
       - name: Test 2
-      - run: echo "Deploying to production"
+        run: echo "Deploying to production"
 
       - name: Test 3
-      - run: echo "Deploying to production"
+        run: echo "Deploying to production"
 
       - name: Test 4
-      - run: echo "Deploying to production"
+        run: echo "Deploying to production"
 
       - name: Test 5
-      - run: echo "Deploying to production"
+        run: echo "Deploying to production"
 
       - name: Test 6
-      - run: echo "Deploying to production"
+        run: echo "Deploying to production"
 
       - name: Test 7
-      - run: echo "Deploying to production"
+        run: echo "Deploying to production"
 
       - name: Test 8
-      - run: echo "Deploying to production"
+        run: echo "Deploying to production"
 
       - name: Test 9
-      - run: echo "Deploying to production"
+        run: echo "Deploying to production"
 
       - name: Test 10
-      - run: echo "Deploying to production"
+        run: echo "Deploying to production"
