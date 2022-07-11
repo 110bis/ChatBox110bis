@@ -1,0 +1,14 @@
+on:
+  push:
+    branches:
+      - dev
+      - ver_2.0.0
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+      url: https://test.com
+    steps:
+      - run: echo "Deploying to production"
